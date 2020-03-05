@@ -1,67 +1,62 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 import { connect } from 'react-redux';
+import { Income, Expense } from '../../types';
+
+function isIncome(income: Income[], current_day: Dayjs) {
+  let list = [];
+
+  for (let elem of income) {
+    const start_date = dayjs(elem.frequency.start_date);
+    if (
+      start_date.isSame(current_day) ||
+      current_day.diff(start_date, 'day') % elem.frequency.days_between === 0
+    ) {
+      list.push(elem.amount);
+    }
+  }
+
+  return list;
+}
+
+function isExpense(expenses: Expense[], current_day: Dayjs) {
+  let list = [];
+
+  for (let elem of expenses) {
+    for (let day of elem.recurrance.day) {
+      if (parseInt(current_day.format('D')) === day) {
+        list.push(elem.amount);
+      }
+    }
+  }
+
+  return list;
+}
 
 type Props = {
-  day: dayjs.Dayjs;
+  day: Dayjs;
   today?: boolean;
   income: any[];
   expenses: any[];
 };
-
 const DayCard = (props: Props) => {
-  const paydays = isPayday();
-  const expenses = isExpense();
-
-  useEffect(() => {
-    // console.log(expenses);
-  }, [expenses]);
-
-  function isPayday() {
-    let list = [];
-
-    for (let elem of props.income) {
-      if (
-        elem.frequency.start_date.isSame(props.day) ||
-        props.day.diff(elem.frequency.start_date, 'day') %
-          elem.frequency.days_between ===
-          0
-      ) {
-        list.push(elem.amount);
-      }
-    }
-
-    return list;
-  }
-
-  function isExpense() {
-    let list = [];
-
-    for (let elem of props.expenses) {
-      for (let day of elem.recurrance.day) {
-        if (parseInt(props.day.format('D')) === day) {
-          list.push(elem.amount);
-        }
-      }
-    }
-
-    return list;
-  }
+  const income = isIncome(props.income, props.day);
+  const expenses = isExpense(props.expenses, props.day);
 
   return (
     <StyledCard isToday={props.today}>
       <span>{props.day.date()}</span>
       <div>
-        {paydays.length > 0 && (
-          <div className='payday'>
-            ${paydays.reduce((prev, curr) => prev + curr)}
+        {income.length > 0 && (
+          <div className='income'>
+            ${income.reduce((prev, curr) => prev + curr).toFixed(2)}
           </div>
         )}
         {expenses.length > 0 && (
           <div className='expense'>
-            ${expenses.reduce((prev, curr) => prev + curr)}
+            ${expenses.reduce((prev, curr) => prev + curr).toFixed(2)}
           </div>
         )}
       </div>
@@ -91,7 +86,7 @@ const StyledCard = styled.div<StyledProps>`
     justify-content: flex-end;
   }
 
-  div.payday {
+  div.income {
     padding: 2px 5px;
     background: #88c58a;
   }

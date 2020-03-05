@@ -98,7 +98,7 @@ function mapStateToProps(state: any) {
   const date = dayjs(`${year}-${month}-${day}`, 'YYYY-MM-DD');
 
   return {
-    today: state.calendar.today,
+    today: dayjs(state.calendar.today),
     date,
     month,
     year: year,

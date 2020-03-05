@@ -23,7 +23,7 @@ const Sidebar = () => {
             <FaCalendar /> Month View
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to='/week'>
             <FaCalendarWeek /> Week View
           </Link>
@@ -32,7 +32,7 @@ const Sidebar = () => {
           <Link to='/agenda'>
             <FaCalendarDay /> Agenda View
           </Link>
-        </li>
+        </li> */}
       </ul>
       <ul>
         <li>
@@ -80,7 +80,7 @@ const StyledSidebar = styled.aside`
   }
 
   ul {
-    margin: 10px 0;
+    margin: 5px 0;
     list-style-type: none;
 
     li {
