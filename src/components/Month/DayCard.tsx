@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { connect } from 'react-redux';
-import { Income, Expense } from '../../types';
+import { Income, Expense } from 'src/types';
 
 function isIncome(income: Income[], current_day: Dayjs) {
   let list = [];

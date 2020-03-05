@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MonthCalendar from './components/Month/Calendar';
 import Sidebar from './components/Sidebar';
-import Expense from './components/Expense';
-import Income from './components/Income';
+import Expense from './components/Forms/Expense';
+import Income from './components/Forms/Income';
 
 function App() {
   return (

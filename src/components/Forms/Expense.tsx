@@ -1,44 +1,35 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import * as yup from 'yup';
 import styled from 'styled-components';
-import { Income } from '../types';
-import dayjs from 'dayjs';
+import { Expense } from 'src/types';
 
 const validationSchema = yup.object().shape({
   title: yup.string().required(),
   amount: yup.number().required(),
-  start_date: yup.date().required(),
-  days_between: yup.number().required()
+  recurrance: yup.number().required()
 });
 
-type Props = {
-  dispatch: any;
-};
-const IncomeForm = (props: Props) => {
-  const { register, handleSubmit, errors } = useForm({
+const ExpenseForm = (props: { dispatch: any }) => {
+  const { register, handleSubmit } = useForm({
     validationSchema
   });
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
-
   let history = useHistory();
   function onSubmit(data: any) {
-    const payload: Income = {
+    const payload: Expense = {
       title: data.title,
       amount: parseFloat(data.amount),
-      frequency: {
-        start_date: dayjs(data.start_date).format('YYYY-MM-DD'),
-        days_between: data.days_between
+      recurrance: {
+        day: [parseInt(data.recurrance)]
       }
     };
+
     props.dispatch({
-      type: 'ADD_INCOME',
+      type: 'ADD_EXPENSE',
       payload
     });
 
@@ -55,11 +46,8 @@ const IncomeForm = (props: Props) => {
         <label>Amount</label>
         <input name='amount' type='number' step='0.01' ref={register} />
 
-        <label>Start Date</label>
-        <input name='start_date' type='date' ref={register} />
-
-        <label>Days Between (for two weeks put 14)</label>
-        <input name='days_between' type='number' ref={register} />
+        <label>Day</label>
+        <input name='recurrance' type='number' ref={register} />
 
         <input type='submit' />
       </StyledForm>
@@ -90,4 +78,4 @@ const StyledForm = styled.form`
   }
 `;
 
-export default connect()(IncomeForm);
+export default connect()(ExpenseForm);
