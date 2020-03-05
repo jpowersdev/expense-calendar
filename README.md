@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Redux Income & Expense Tracker
 
-## Available Scripts
+This originated as a playground for messing with redux, and evolved into something I'd like to use.
 
-In the project directory, you can run:
+Most budget apps let you label past transactions so you can see where your money has been spent. I'm planning to go the opposite direction with this, allowing you to enter all your recurring income and expenses so you can see an overview of where your money _will_ go.
 
-### `yarn start`
+There will be charts and graphs. As of this release, it does the following:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Show a calendar of each month
+- Highlight today's date
+- Allow you to increment/decrement month
+- Allows you to fast travel back to the current month
+- Sums up the income/expenses in a given day
+- Allows you to enter new income through a form
+- Allows you to enter new expenses through a form
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+All of this is stored in the global redux state, and all actions are dispatched through that system.
 
-### `yarn test`
+Styles are handled by styled components. For now, I'm defining everything on the fly, but soon everything will be refactored in such a way that it can be reused.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Forms are using react-hook-form, with yup for validation. I've used a lot of formik in the past, but react-hook-form boasts impressive performance with far fewer re-renders during input. I gave it a shot and it's wonderfully simple.
 
-### `yarn build`
+Dayjs is the date library I chose because it has the same api as momentjs, but is much smaller (and also immutable).
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+If you have questions, feel free to email me: [jpowersdev@gmail.com](mailto:jpowersdev@gmail.com)
