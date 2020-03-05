@@ -1,21 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './style.css';
+import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-
-import reducer from './reducers';
-
-const store = configureStore({ reducer });
-
-store.subscribe(() => {
-  if (process.env.NODE_ENV === 'development') console.log(store.getState());
-
-  // window.localStorage.setItem('expense', JSON.stringify(store.getState()));
-});
+import store from './store';
 
 ReactDOM.render(
   <Provider store={store}>

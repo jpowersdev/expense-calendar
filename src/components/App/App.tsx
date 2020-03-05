@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import MonthCalendar from './components/Month/Calendar';
-import Sidebar from './components/Sidebar';
-import Expense from './components/Forms/Expense';
-import Income from './components/Forms/Income';
+import MonthCalendar from '../../containers/Calendar/Calendar';
+import Sidebar from '../Sidebar/Sidebar';
+import Expense from '../../containers/ExpenseForm/Expense';
+import Income from '../../containers/IncomeForm/Income';
+import { StyledApp } from './styles';
 
 function App() {
   return (
@@ -28,22 +28,5 @@ function App() {
     </StyledApp>
   );
 }
-const StyledApp = styled.div`
-  position: relative;
-  display: grid;
-  grid-template-columns: 250px auto;
-
-  main,
-  aside {
-    max-height: 100vh;
-    overflow-y: auto;
-  }
-
-  main {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 40px;
-  }
-`;
 
 export default App;

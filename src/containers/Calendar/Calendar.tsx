@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import weekday from 'dayjs/plugin/weekday';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-import DayCard from './DayCard';
+import DayCard from '../../components/DayCard/DayCard';
 import styled from 'styled-components';
 
 import { connect } from 'react-redux';
