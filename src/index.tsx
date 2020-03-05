@@ -12,7 +12,7 @@ import reducer from './reducers';
 const store = configureStore({ reducer });
 
 store.subscribe(() => {
-  console.log(store.getState());
+  if (process.env.NODE_ENV === 'development') console.log(store.getState());
 
   // window.localStorage.setItem('expense', JSON.stringify(store.getState()));
 });
